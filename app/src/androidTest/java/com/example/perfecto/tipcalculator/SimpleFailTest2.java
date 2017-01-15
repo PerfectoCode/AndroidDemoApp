@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
@@ -31,13 +32,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SimpleTest {
+public class SimpleFailTest2 {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void simpleTest() {
+    public void simpleFailTest2() {
         ViewInteraction editText = onView(
                 withId(R.id.bill_value));
         editText.perform(scrollTo(), click());
@@ -49,7 +50,7 @@ public class SimpleTest {
         ViewInteraction editText3 = onView(
                 allOf(withId(R.id.tip_percent_input),
                         withParent(withId(R.id.tip_percent_container))));
-        editText3.perform(scrollTo(), replaceText("12"), closeSoftKeyboard());
+        editText3.perform(scrollTo(), replaceText("10"), closeSoftKeyboard());
 
         ViewInteraction editText4 = onView(
                 allOf(withId(R.id.split_number_input),
@@ -65,98 +66,17 @@ public class SimpleTest {
                 allOf(withId(R.id.calculate_tips), withText("Calculate tip"), isDisplayed()));
         button.perform(click());
 
+        pressBack();
+
         ViewInteraction textView = onView(
-                allOf(withId(R.id.total_to_pay_result), withText("56"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.scroll_content),
-                                        0),
-                                7),
-                        isDisplayed()));
-        textView.check(matches(withText("56")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.total_tip_result), withText("6"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.scroll_content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        textView2.check(matches(withText("6")));
-
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.tip_per_person_result), withText("3"),
+                allOf(withId(R.id.tip_per_person_result), withText("2.50"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.scroll_content),
                                         0),
                                 11),
                         isDisplayed()));
-        textView4.check(matches(withText("3")));
-
-    }
-
-    @Test
-    public void simpleTestt() {
-        ViewInteraction editText = onView(
-                withId(R.id.bill_value));
-        editText.perform(scrollTo(), click());
-
-        ViewInteraction editText2 = onView(
-                withId(R.id.bill_value));
-        editText2.perform(scrollTo(), replaceText("50"), closeSoftKeyboard());
-
-        ViewInteraction editText3 = onView(
-                allOf(withId(R.id.tip_percent_input),
-                        withParent(withId(R.id.tip_percent_container))));
-        editText3.perform(scrollTo(), replaceText("12"), closeSoftKeyboard());
-
-        ViewInteraction editText4 = onView(
-                allOf(withId(R.id.split_number_input),
-                        withParent(withId(R.id.split_number_container))));
-        editText4.perform(scrollTo(), replaceText("2"), closeSoftKeyboard());
-
-        ViewInteraction editText5 = onView(
-                allOf(withId(R.id.split_number_input), withText("2"),
-                        withParent(withId(R.id.split_number_container))));
-        editText5.perform(pressImeActionButton());
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.calculate_tips), withText("Calculate tip"), isDisplayed()));
-        button.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.total_to_pay_result), withText("56"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.scroll_content),
-                                        0),
-                                7),
-                        isDisplayed()));
-        textView.check(matches(withText("56")));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.total_tip_result), withText("6"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.scroll_content),
-                                        0),
-                                9),
-                        isDisplayed()));
-        textView2.check(matches(withText("6")));
-
-
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.tip_per_person_result), withText("3"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.scroll_content),
-                                        0),
-                                11),
-                        isDisplayed()));
-        textView4.check(matches(withText("3")));
+        textView.check(matches(withText("2.50")));
 
     }
 
